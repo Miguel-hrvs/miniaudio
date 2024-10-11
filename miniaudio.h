@@ -11491,6 +11491,10 @@ IMPLEMENTATION
 #include <emscripten/emscripten.h>
 #endif
 
+#ifdef MA_N3DS
+#include <3ds.h>
+#endif
+
 
 /* Architecture Detection */
 #if !defined(MA_64BIT) && !defined(MA_32BIT)
