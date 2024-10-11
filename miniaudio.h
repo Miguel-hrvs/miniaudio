@@ -11870,7 +11870,7 @@ static MA_INLINE ma_uint32 ma_swap_endian_uint32(ma_uint32 n)
 }
 
 
-#if !defined(__EMSCRIPTEN__)
+#if !defined(MA_EMSCRIPTEN)
 #ifdef MA_WIN32
 static void ma_sleep__win32(ma_uint32 milliseconds)
 {
