@@ -3882,6 +3882,9 @@ typedef ma_uint16 wchar_t;
     #if defined(__EMSCRIPTEN__)
         #define MA_EMSCRIPTEN
     #endif
+    #if defined(__N3DS__)
+        #define MA_N3DS
+    #endif
     #if defined(__ORBIS__)
         #define MA_ORBIS
     #endif
@@ -6554,7 +6557,7 @@ This section contains the APIs for device playback and capture. Here is where yo
             #define MA_SUPPORT_ALSA
         #endif
     #endif
-    #if !defined(MA_BSD) && !defined(MA_ANDROID) && !defined(MA_EMSCRIPTEN)
+    #if !defined(MA_BSD) && !defined(MA_ANDROID) && !defined(MA_EMSCRIPTEN) && !defined(MA_N3DS)
         #define MA_SUPPORT_PULSEAUDIO
         #define MA_SUPPORT_JACK
     #endif
@@ -11870,7 +11873,7 @@ static MA_INLINE ma_uint32 ma_swap_endian_uint32(ma_uint32 n)
 }
 
 
-#if !defined(MA_EMSCRIPTEN)
+#if !defined(__EMSCRIPTEN__) && !defined(__N3DS__)
 #ifdef MA_WIN32
 static void ma_sleep__win32(ma_uint32 milliseconds)
 {
@@ -16096,7 +16099,7 @@ static ma_result ma_thread_create__posix(ma_thread* pThread, ma_thread_priority 
     int result;
     pthread_attr_t* pAttr = NULL;
 
-#if !defined(__EMSCRIPTEN__)
+#if !defined(__EMSCRIPTEN__) && !defined(__N3DS__)
     /* Try setting the thread priority. It's not critical if anything fails here. */
     pthread_attr_t attr;
     if (pthread_attr_init(&attr) == 0) {
